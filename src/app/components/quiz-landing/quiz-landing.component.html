@@ -1,0 +1,33 @@
+<div class="container">
+
+  <h4 class="display-4 text-center">Welcome</h4>
+  <div class="row">
+    <div class="start col-7">
+      <span>
+        <button class="btn btn-primary" routerLink='/quiz/test'>
+          <h3>Take Test</h3>
+        </button>
+      </span>
+    </div>
+    <div class="users col-5">
+      <table class="table table-bordered table-dark">
+        <thead>
+          <tr>
+            <th scope="col">Name</th>
+            <th scope="col">Scored</th>
+            <th scope="col">Details</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let user of users; let i=index">
+            <th>{{ user['name'] }}</th>
+            <th>{{ user['score'] }}</th>
+            <th><a class="btn btn-secondary" [routerLink]="['/user', user['id']]">See details</a></th>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+
+</div>

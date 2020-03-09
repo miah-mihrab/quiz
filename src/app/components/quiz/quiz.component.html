@@ -1,0 +1,114 @@
+<div class="container mt-5">
+  <section class="user-section container alert alert-secondary">
+    <pre *ngIf="!user">* Please enter Username and Email to store your result</pre>
+    <form class="form-inline" #userForm="ngForm" (submit)="addUser(userForm)" *ngIf="!user">
+      <div class="form-group mb-2">
+        <label class="sr-only">Email</label>
+        <input type="email" class="form-control" id="email" placeholder="email@host.com" name="email"
+          [(ngModel)]="email" />
+      </div>
+      <div class="form-group mx-sm-3 mb-2">
+        <label class="sr-only">Username</label>
+        <input type="text" class="form-control" id="name" placeholder="Username" name="username" [(ngModel)]="name" />
+      </div>
+      <button type="submit" class="btn btn-primary mb-2">Confirm</button>
+    </form>
+
+    <div *ngIf="user">
+      <span>Welcome {{ name }}!</span><br>
+      <span style="font-size: 0.8rem !important;">Your current score is: {{ score }}</span>
+
+    </div>
+  </section>
+  <ng-container *ngIf="userCreated">
+    <div *ngIf="submitted">
+      <form action="" #quizForm="ngForm" (submit)="submitQuiz(quizForm)">
+        <ng-container *ngFor="let quiz of quizes; let i = index">
+          <div class="question text-info">
+            <div class="form-group">
+              <label for="" class="form-check-label">{{ quiz["question"] }}</label><br />
+
+              <div class="form-check form-check-inline">
+                <input type="radio" class="form-check-input" [name]="quiz['name']" [value]="quiz['optionA']"
+                  (change)="onChange($event)" />
+                <label for="" class="form-check-label">{{
+                quiz["optionA"]
+              }}</label><br />
+
+                <input type="radio" class="form-check-input ml-3" [name]="quiz['name']" [value]="quiz['optionB']"
+                  (change)="onChange($event)" />
+                <label for="" class="form-check-label">{{
+                quiz["optionB"]
+              }}</label><br />
+              </div>
+              <br />
+              <div class="form-check form-check-inline">
+                <input type="radio" class="form-check-input" [name]="quiz['name']" [value]="quiz['optionC']"
+                  (change)="onChange($event)" />
+                <label for="" class="form-check-label">{{
+                quiz["optionC"]
+              }}</label><br />
+
+                <input type="radio" class="form-check-input ml-3" [name]="quiz['name']" [value]="quiz['optionD']"
+                  (change)="onChange($event)" />
+                <label for="" class="form-check-label">{{
+                quiz["optionD"]
+              }}</label>
+              </div>
+            </div>
+          </div>
+        </ng-container>
+        <input type="submit" class="btn btn-secondary mt-3" />
+      </form>
+    </div>
+  </ng-container>
+
+  <ng-container *ngIf="showRes.length > 0">
+    <form action="">
+      <ng-container *ngFor="let quiz of quizes; let i = index">
+        <div class="question text-muted">
+          <div class="form-group">
+            <label for="" class="form-check-label">{{ quiz["question"] }}</label><br />
+            <div class="form-check form-check-inline">
+              <input type="radio" class="form-check-input" [name]="quiz['name']" [value]="quiz['optionA']"
+                (change)="onChange($event)" disabled />
+              <label for="" class="form-check-label" [ngClass]="{
+                  'bg success': (quiz['optionA'] === quiz['answer'] && showRes[i]===quiz['answer']) || (quiz['optionA'] === quiz['answer']),
+                  'bg del': quiz['optionA'] != quiz['answer'] && showRes[i]===quiz['optionA']
+                }">
+                <span class="text-muted">{{ quiz["optionA"] }}</span>
+              </label><br />
+
+              <input type="radio" class="form-check-input ml-3" [name]="quiz['name']" [value]="quiz['optionB']"
+                (change)="onChange($event)" disabled />
+              <label for="" class="form-check-label" [ngClass]="{
+                  'bg success':
+                    quiz['optionB'] === (quiz['answer'] && showRes[i]===quiz['answer']) || (quiz['optionB'] === quiz['answer']),
+                  'bg del': quiz['optionB'] != quiz['answer'] && showRes[i]===quiz['optionB']
+                }"><span class="text-muted">{{ quiz["optionB"] }}</span></label><br />
+            </div>
+            <br />
+            <div class="form-check form-check-inline">
+              <input type="radio" class="form-check-input" [name]="quiz['name']" [value]="quiz['optionC']"
+                (change)="onChange($event)" disabled />
+              <label for="" class="form-check-label" [ngClass]="{
+                  'bg success': (quiz['optionC'] === quiz['answer'] && showRes[i]===quiz['answer']) || (quiz['optionC'] === quiz['answer']),
+                  'bg del': quiz['optionC'] != quiz['answer'] && showRes[i]===quiz['optionC']
+                }"><span class="text-muted">{{ quiz["optionC"] }}</span></label><br />
+
+              <input type="radio" class="form-check-input ml-3" [value]="quiz['optionD']" (change)="onChange($event)"
+                disabled />
+              <label for="" class="form-check-label" [ngClass]="{
+                  'bg success': (quiz['optionD'] === quiz['answer'] && showRes[i]===quiz['answer']) || (quiz['optionD'] === quiz['answer']),
+                  'bg del': quiz['optionD'] != quiz['answer'] && showRes[i]===quiz['optionD']
+                }">
+                <span class="text-muted">{{ quiz["optionD"] }}</span></label>
+            </div>
+          </div>
+        </div>
+      </ng-container>
+      <!-- <input type="submit" class="btn btn-secondary mt-3"> -->
+      <button class="btn btn-primary" (click)="retry()">Retry</button>
+    </form>
+  </ng-container>
+</div>
