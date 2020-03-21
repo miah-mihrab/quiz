@@ -24,7 +24,6 @@ export class QuizLandingComponent implements OnInit {
             id: data.payload.doc.id
           });
         });
-        console.log(this.users)
       });
   }
 

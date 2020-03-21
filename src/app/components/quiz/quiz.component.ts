@@ -71,9 +71,7 @@ export class QuizComponent implements OnInit {
       .collection("users")
       .doc(this.email).get()
       .subscribe(e => {
-        console.log(e.data()['attempted'])
         this.attempted = e.data()['attempted'] || 0;
-        console.log(this.attempted)
         this.db
           .collection("users")
           .doc(this.email).set(

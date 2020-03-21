@@ -6,16 +6,13 @@ import { FormsModule } from '@angular/forms';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AppComponent } from './app.component';
-import { SetQuestionComponent } from './components/set-question/set-question.component';
 import { QuizComponent } from './components/quiz/quiz.component';
-import { ReactiveFormsModule } from '@angular/forms';
 import { QuizLandingComponent } from './components/quiz-landing/quiz-landing.component';
 import { UserComponent } from './components/user/user.component'
 
 @NgModule({
   declarations: [
     AppComponent,
-    SetQuestionComponent,
     QuizComponent,
     QuizLandingComponent,
     UserComponent
@@ -28,8 +25,7 @@ import { UserComponent } from './components/user/user.component'
     RouterModule.forRoot([
       { path: '', component: QuizLandingComponent },
       { path: 'quiz/test', component: QuizComponent },
-      { path: 'user/:id', component: UserComponent },
-      { path: "admin/set-question", component: SetQuestionComponent }
+      { path: 'user/:id', component: UserComponent }
     ])
   ],
   providers: [],
